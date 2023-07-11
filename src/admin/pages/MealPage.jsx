@@ -1,6 +1,6 @@
 
 export const MealPage = () => {
   return (
-    <div>MealPage</div>
+    <div>Comming soon meal page!</div>
   )
 }
