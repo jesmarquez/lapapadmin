@@ -1,13 +1,24 @@
-import { Box } from "@mui/material"
-import { NavBar } from "../components"
+import { Box, Toolbar } from "@mui/material"
+import { NavBar, SideBar } from "../components"
+
+const drawerWidth = 280;
 
 export const LayoutAdmin = ({ children }) => {
+
   return (
     <Box sx={{ display: "flex"}}>
-        <NavBar>
-            
+        <NavBar drawerWidth={ drawerWidth }>
         </NavBar>
-        { children }
+        <SideBar drawerWidth={ drawerWidth }>
+        </SideBar>
+        <Box 
+          component='main'
+          sx={{flexGrow: 1, p: 3}}
+          >
+          <Toolbar/>
+          { children }
+        </Box>
+
     </Box>
   )
 }

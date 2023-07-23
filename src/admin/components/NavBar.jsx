@@ -6,7 +6,7 @@ export const NavBar = ({ drawerWidth = 240 }) => {
     <AppBar
         position='fixed'
         sx={{
-            width: { sm: `calc(100% - ${ drawerWidth }px)`},
+            width: { sm: `calc(100% - ${ drawerWidth }px)` },
             ml: { sm: `${ drawerWidth }px` }
         }}
     >
@@ -22,7 +22,7 @@ export const NavBar = ({ drawerWidth = 240 }) => {
             </IconButton>
 
             <Grid container direction='row' justifyContent='space-between' alignItems='center'>
-                <Typography variant='h6' noWrap component='div'>Journal App</Typography>
+                <Typography variant='h6' noWrap component='div'>Lapapa Admin</Typography>
                 <IconButton color='error'>
                     <LogoutOutlined/>
                 </IconButton>
