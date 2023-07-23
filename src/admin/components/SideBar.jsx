@@ -21,7 +21,11 @@ export const SideBar = ({ drawerWidth = 240 }) => {
                 '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
             }}
       >
-        <Toolbar/>
+        <Toolbar>
+            <Typography variant='h6' noWrap component='div'>
+                Jesus Marquez
+            </Typography>
+        </Toolbar>
         <List>
         {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem key={text} disablePadding>
