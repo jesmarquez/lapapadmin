@@ -1,7 +1,16 @@
 import { Google } from "@mui/icons-material"
 import { Grid, TextField, Typography, Button } from "@mui/material"
+import { useNavigate } from "react-router-dom"
 
 export const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const onLogin = () => {
+    console.log('login!');
+    navigate('/admin', {
+      replace: true      
+    });
+  }
   return (
     <Grid
       container
@@ -43,7 +52,10 @@ export const LoginPage = () => {
           <Grid>
             <Grid container spacing={ 2 } sx={{ mt:2 }}>
               <Grid item xs={ 12 } sm={ 6 }>
-                <Button variant="contained" fullWidth>
+                <Button 
+                  variant="contained" fullWidth
+                  onClick={ onLogin }
+                  >
                   Login
                 </Button>
               </Grid>
