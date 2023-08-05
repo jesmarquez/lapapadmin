@@ -7,7 +7,7 @@ export const LoginPage = () => {
 
   const onLogin = () => {
     console.log('login!');
-    navigate('/admin', {
+    navigate('/admin/dashboard', {
       replace: true      
     });
   }
