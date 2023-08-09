@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom"
 import { AuthRoutes } from "../auth/routes/AuthRoutes"
 import { AdminRoutes } from "../admin/routes/AdminRoutes"
+import { AppHome } from "../home/AppHome"
 
 export const AppRouter = () => {
   return (
@@ -10,7 +11,9 @@ export const AppRouter = () => {
         {/** Admin */}
         <Route path="/admin/*" element= { <AdminRoutes/> } />
 
-        {/* <Route path="/*" element= { <AuthRoutes/> } /> */}
+        <Route path="/*" element= { <AppHome/> } />
     </Routes>
+
   )
+  // https://stackoverflow.com/questions/70260455/react-router-v6-not-rendering-in-production
 }
