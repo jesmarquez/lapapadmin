@@ -1,7 +1,18 @@
 import { LogoutOutlined, MenuOutlined } from '@mui/icons-material'
 import { AppBar, Grid, IconButton, Toolbar, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 export const NavBar = ({ drawerWidth = 240 }) => {
+  const navigate = useNavigate();
+
+  const onLogoutClick = () => {
+    // console.log('logout');
+    navigate('/auth/login', {
+      replace: true
+    });
+
+  }
+
   return (
     <AppBar
         position='fixed'
@@ -23,7 +34,10 @@ export const NavBar = ({ drawerWidth = 240 }) => {
 
             <Grid container direction='row' justifyContent='space-between' alignItems='center'>
                 <Typography variant='h6' noWrap component='div'>Lapapa Admin</Typography>
-                <IconButton color='error'>
+                <IconButton 
+                  color='error'
+                  onClick={ onLogoutClick }
+                >
                     <LogoutOutlined/>
                 </IconButton>
             </Grid>
