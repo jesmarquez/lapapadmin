@@ -1,7 +1,12 @@
 import { Google } from "@mui/icons-material"
 import { Grid, TextField, Typography, Button } from "@mui/material"
 import { useNavigate } from "react-router-dom"
+import { useForm } from "../../hooks";
 
+const formData = {
+  email: 'jesmqz@gmail.com',
+  password: '*******'
+}
 export const LoginPage = () => {
   const navigate = useNavigate();
 
@@ -11,6 +16,15 @@ export const LoginPage = () => {
       replace: true      
     });
   }
+
+  const { email, password, onInputChange, formState } = useForm(formData);
+
+  const onSubmit = ( event ) => {
+    event.preventDefault();
+    console.log('submit login');
+    console.log(formState);
+  }
+
   return (
     <Grid
       container
@@ -27,7 +41,7 @@ export const LoginPage = () => {
         sx={ { backgroundColor: 'white', padding: 3, borderRadius: 2 } }
       >
         <Typography variant='h5'>Login</Typography>
-        <form action="">
+        <form onSubmit={ onSubmit }>
 
           <Grid container>
             <Grid item xs={ 12 } sx={{ mt: 2 }}>
@@ -35,6 +49,11 @@ export const LoginPage = () => {
                 label="Email"
                 type="email"
                 placeholder="email@google.com"
+                name="email"
+                value={ email }
+                onChange={ onInputChange }
+                error={ true }
+                helperText='email is mandatory'
                 fullWidth
               >
               </TextField>
@@ -44,6 +63,9 @@ export const LoginPage = () => {
                 label="Password"
                 type="password"
                 placeholder="Your password!"
+                name="password"
+                value={ password }
+                onChange={ onInputChange }
                 fullWidth
               >
               </TextField>
@@ -54,7 +76,8 @@ export const LoginPage = () => {
               <Grid item xs={ 12 } sm={ 6 }>
                 <Button 
                   variant="contained" fullWidth
-                  onClick={ onLogin }
+                  type="submit"
+                  // onClick={ onLogin }
                   >
                   Login
                 </Button>
