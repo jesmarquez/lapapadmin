@@ -43,9 +43,14 @@ export const LoginPage = () => {
     event.preventDefault();
     console.log('submit login');
     console.log(formState);
+
+    if ( isFormValid ) {
+      navigate('/admin/dashboard', {
+        replace: true      
+      });
+    }
     setFormSubmitted(true);
     // dispatch( checkingAuthentication())
-
   }
 
   const onGoogleSignIn = () => {
