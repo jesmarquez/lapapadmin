@@ -1,25 +1,37 @@
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
 import { checkingAuthentication, startGoogleSignIn } from "../../store/auth/thunks"
 import { Google } from "@mui/icons-material"
-import { Grid, TextField, Typography, Button } from "@mui/material"
+import { Grid, TextField, Typography, Button, Alert } from "@mui/material"
 import { useForm } from "../../hooks";
 
 const formData = {
-  email: 'jesmqz@gmail.com',
-  password: '*******'
+  email: '',
+  password: ''
 }
+
+const formValidations = {
+  email: [ (value) => value.includes('@'), 'El correo debe tener un @'],
+  password: [ (value) => value.length >= 6, 'El password debe ser mayor 6 caracteres']
+}
+
 export const LoginPage = () => {
 
   const { status  } = useSelector( state => state.auth);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [ formSubmitted, setFormSubmitted ] = useState(false);
+
+  const { email, emailValid, 
+    password, passwordValid, 
+    onInputChange, formState, isFormValid } = useForm(
+    formData, formValidations);
+
   const isAuthenticating = useMemo( () => status === 'checking', [status]);
   
-  useMemo
+  
   const onLogin = () => {
     console.log('login!');
     navigate('/admin/dashboard', {
@@ -27,13 +39,12 @@ export const LoginPage = () => {
     });
   }
 
-  const { email, password, onInputChange, formState } = useForm(formData);
-
   const onSubmit = ( event ) => {
     event.preventDefault();
     console.log('submit login');
     console.log(formState);
-    dispatch( checkingAuthentication())
+    setFormSubmitted(true);
+    // dispatch( checkingAuthentication())
 
   }
 
@@ -58,6 +69,12 @@ export const LoginPage = () => {
         sx={ { backgroundColor: 'white', padding: 3, borderRadius: 2 } }
       >
         <Typography variant='h5'>Login</Typography>
+      
+
+        { !isFormValid && formSubmitted ? 
+          <Alert severity="error">invalido form</Alert>
+        : ''}
+
         <form onSubmit={ onSubmit }>
 
           <Grid container>
@@ -69,8 +86,8 @@ export const LoginPage = () => {
                 name="email"
                 value={ email }
                 onChange={ onInputChange }
-                error={ true }
-                helperText='email is mandatory'
+                error={ !!emailValid && formSubmitted }
+                helperText= { emailValid }
                 fullWidth
               >
               </TextField>
@@ -82,6 +99,8 @@ export const LoginPage = () => {
                 placeholder="Your password!"
                 name="password"
                 value={ password }
+                error={ !!passwordValid && formSubmitted }
+                helperText= { passwordValid }
                 onChange={ onInputChange }
                 fullWidth
               >
