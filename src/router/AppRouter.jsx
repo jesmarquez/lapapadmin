@@ -1,17 +1,31 @@
 import { Routes, Route, Navigate } from "react-router-dom"
+import { useSelector } from "react-redux"
 import { AuthRoutes } from "../auth/routes/AuthRoutes"
 import { AdminRoutes } from "../admin/routes/AdminRoutes"
 import { AppHome } from "../home/AppHome"
+import { CheckingAuth } from "../ui/components/CheckingAuth"
+import { useCheckAuth } from "../hooks"
 
 export const AppRouter = () => {
+
+  const { status } = useCheckAuth();
+
+  if ( status === 'checking') {
+    return <CheckingAuth/>;
+  }
   return (
     <Routes>
-        {/** Login */}
-        <Route path="/auth/*" element= { <AuthRoutes/> } />
-        {/** Admin */}
-        <Route path="/admin/*" element= { <AdminRoutes/> } />
+        { status === 'authenticated'
+        ? <Route path="/*" element= { <AdminRoutes/> } /> 
+        : <Route path="/auth/*" element= { <AuthRoutes/> } />
+        }
 
-        <Route path="/*" element= { <AppHome/> } />
+        {/** Login */}
+        {/* <Route path="/auth/*" element= { <AuthRoutes/> } /> */}
+        {/** Admin */}
+        {/* <Route path="/admin/*" element= { <AdminRoutes/> } /> */}
+
+        <Route path="/*" element= { <Navigate to='/auth/login'/> } />
     </Routes>
 
   )

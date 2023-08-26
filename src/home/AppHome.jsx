@@ -8,6 +8,7 @@ export const AppHome = () => {
   const navigate = useNavigate();
 
   const onGoLogin = () => {
+    console.log('go login!');
     navigate('/auth/login', {
       replace: true
     });

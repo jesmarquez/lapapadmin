@@ -9,7 +9,7 @@ export const AdminRoutes = () => {
         <Route path="dashboard" element={ <MainPage/> }/>
         <Route path="customers" element={ <CustomerPage/> }/>
         <Route path="meals" element={ <MealPage/> }/>
-        {/* <Route path="/*" element={ <Navigate to="/admin"/>} /> */}
+        <Route path="/*" element={ <Navigate to="/dashboard"/>} />
 
     </Routes>
   )

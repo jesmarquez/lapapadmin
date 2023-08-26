@@ -23,3 +23,8 @@ export const singInWithGoogle = async () => {
         }
     }
 }
+
+export const logoutFirebase = async () => {
+
+    return await FirebaseAuth.signOut();
+}
